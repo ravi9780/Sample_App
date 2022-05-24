@@ -13,11 +13,12 @@ class DetailViewController: BaseViewController {
     var currencies: [Currency]?
     var selectedCurrency: Currency?
     var currencyValues = [CurrencyValue]()
+    var showFavourites = false
+    
+    var selectedDate: Date?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.tableHeaderView = tableHeaderView
         
         fetchContent()
     }
@@ -28,7 +29,7 @@ class DetailViewController: BaseViewController {
             tableHeaderView.codeLabel.text = selectedCurrency.code.uppercased()
             tableHeaderView.nameLabel.text = selectedCurrency.name
             
-            APIHandler().fetchCurrencyValues(forBaseCurrency: selectedCurrency, forDate: nil) { currencyValues, date, error in
+            APIHandler().fetchCurrencyValues(forBaseCurrency: selectedCurrency, forDate: selectedDate) { currencyValues, date, error in
                 if let error = error {
                     self.showAlert(withTitle: error.localizedDescription, message: "Try again.")
                 } else {
@@ -38,10 +39,12 @@ class DetailViewController: BaseViewController {
                         self.showAlert(withTitle: "No currency conversions values available!", message: "Try again.")
                     }
                     if let date = date {
-                        self.tableHeaderView.dateButton.titleLabel?.text = date.toString()
+                        self.selectedDate = date
+                        self.tableHeaderView.dateButton.setTitle(date.toString(), for: .normal)
                     } else {
-                        self.tableHeaderView.dateButton.titleLabel?.text = Date().toString()
+                        self.tableHeaderView.dateButton.setTitle(Date().toString(), for: .normal)
                     }
+                    self.tableView.tableHeaderView = self.tableHeaderView
                     self.tableView.reloadData()
                 }
             }
@@ -58,6 +61,19 @@ class DetailViewController: BaseViewController {
             }
         }
         return ""
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dateVC = segue.destination as? DateViewController {
+            if let dateStr = tableHeaderView.dateButton.titleLabel?.text {
+                Logger.debug("\(dateStr)")
+                dateVC.selectedDate = Date.fromString(dateStr)
+                dateVC.selectionBlock = { date in
+                    self.selectedDate = date
+                    self.fetchContent()
+                }
+            }
+        }
     }
 }
 

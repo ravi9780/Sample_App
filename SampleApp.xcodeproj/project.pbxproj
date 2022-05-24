@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28C79078283AAAC0002956D7 /* DateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C79077283AAAC0002956D7 /* DateViewController.swift */; };
+		28C7907A283AD06F002956D7 /* FavouritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28C79079283AD06F002956D7 /* FavouritesViewController.swift */; };
 		28DE17272834B7C600A9AA96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DE17262834B7C600A9AA96 /* AppDelegate.swift */; };
 		28DE17292834B7C600A9AA96 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DE17282834B7C600A9AA96 /* SceneDelegate.swift */; };
 		28DE172B2834B7C600A9AA96 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DE172A2834B7C600A9AA96 /* ListViewController.swift */; };
@@ -25,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		28C79077283AAAC0002956D7 /* DateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateViewController.swift; sourceTree = "<group>"; };
+		28C79079283AD06F002956D7 /* FavouritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesViewController.swift; sourceTree = "<group>"; };
 		28DE17232834B7C600A9AA96 /* SampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		28DE17262834B7C600A9AA96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28DE17282834B7C600A9AA96 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,7 +105,9 @@
 			children = (
 				28DE17552838DD3100A9AA96 /* BaseViewController.swift */,
 				28DE172A2834B7C600A9AA96 /* ListViewController.swift */,
+				28C79079283AD06F002956D7 /* FavouritesViewController.swift */,
 				28DE17492836C42400A9AA96 /* DetailViewController.swift */,
+				28C79077283AAAC0002956D7 /* DateViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -202,12 +208,14 @@
 				28DE172B2834B7C600A9AA96 /* ListViewController.swift in Sources */,
 				28DE174C2836D84300A9AA96 /* DetailsTableViewCell.swift in Sources */,
 				28DE173D283688D800A9AA96 /* APIHandler.swift in Sources */,
+				28C79078283AAAC0002956D7 /* DateViewController.swift in Sources */,
 				28DE17562838DD3100A9AA96 /* BaseViewController.swift in Sources */,
 				28DE17272834B7C600A9AA96 /* AppDelegate.swift in Sources */,
 				28DE17462836AE9100A9AA96 /* ListTableViewCell.swift in Sources */,
 				28DE175028376CA000A9AA96 /* HeaderView.swift in Sources */,
 				28DE17292834B7C600A9AA96 /* SceneDelegate.swift in Sources */,
 				28DE174E2837481700A9AA96 /* TileView.swift in Sources */,
+				28C7907A283AD06F002956D7 /* FavouritesViewController.swift in Sources */,
 				28DE174A2836C42400A9AA96 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

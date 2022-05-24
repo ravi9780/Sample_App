@@ -1,17 +1,19 @@
 //
-//  ListViewController.swift
+//  FavouritesViewController.swift
 //  SampleApp
 //
-
+//  Created by Mehul Bhavani on 23/05/22.
+//
 
 import UIKit
 
-class ListViewController: BaseViewController {
+class FavouritesViewController: BaseViewController {
     
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var noDataLabel: UILabel!
     
-    var currencies = [Currency]()
-
+    var favCurrencies = [Currency]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,42 +30,37 @@ class ListViewController: BaseViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let indexPath = tableView.indexPathForSelectedRow {
-//            Logger.debug("\(currencies[indexPath.row])")
+            //Logger.debug("\(currencies[indexPath.row])")
             if let detailVC = segue.destination as? DetailViewController {
-                detailVC.selectedCurrency = currencies[indexPath.row]
-                detailVC.currencies = currencies
-                detailVC.showFavourites = false
+                detailVC.selectedCurrency = favCurrencies[indexPath.row]
+                detailVC.currencies = favCurrencies
+                detailVC.showFavourites = true
             }
         }
     }
     
     override func fetchContent() {
-        APIHandler().fetchAllCurrencies { currencies, error in
-            if let error = error {
-                self.showAlert(withTitle: error.localizedDescription, message: "Try again.")
-            } else {
-                if let _currencies = currencies {
-                    self.currencies = _currencies.sorted(by: { $0.name < $1.name })
-                    self.tableView.reloadData()
-                } else {
-                    self.showAlert(withTitle: "No currencies available!", message: "Try again.")
-                }
+        if let favs = UserDefaults.standard.dictionary(forKey: "kFavs") as? [String: String] {
+            //favCurrencies = favs
+            for (key, value) in favs {
+                favCurrencies.append(Currency(code: key, name: value))
             }
+            tableView.reloadData()
         }
+        noDataLabel.isHidden = !favCurrencies.isEmpty
     }
 }
 
-extension ListViewController: UITableViewDataSource, UITableViewDelegate {
+extension FavouritesViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        currencies.count
+        favCurrencies.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseCellID") as! ListTableViewCell
-        let currency = currencies[indexPath.row]
+        let currency = favCurrencies[indexPath.row]
         cell.codeLabel.text = currency.code.uppercased()
         cell.nameLabel.text = currency.name
         
         return cell
     }
 }
-

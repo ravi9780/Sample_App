@@ -6,7 +6,6 @@
 import UIKit
 
 class TileView: UIView {
-    
     @IBInspectable var cornerRadius: CGFloat  = 3.0
     @IBInspectable var shadowColor: UIColor = UIColor.lightGray
     @IBInspectable var shadowOpacity: Float = 1.0

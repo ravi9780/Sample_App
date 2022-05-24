@@ -48,10 +48,10 @@ class APIHandler {
             if let data = data {
                 do {
                     if let dict = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed) as? [String: Any] {
-                        Logger.debug("\(dict)")
+//                        Logger.debug("\(dict)")
                         var _date: Date?
                         if let dateStr = dict["date"] as? String {
-                            _date = Date.fromString(dateStr)
+                            _date = Date.fromReverseString(dateStr)
                         }
                         var currencyValues = [CurrencyValue]()
                         if let values = dict["\(currency.code)"] as? [String: Double] {
@@ -100,6 +100,11 @@ extension Date {
         return formatter.string(from: self)
     }
     static func fromString(_ dateString: String) -> Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd-MM-yyyy"
+        return formatter.date(from: dateString)
+    }
+    static func fromReverseString(_ dateString: String) -> Date? {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter.date(from: dateString)
